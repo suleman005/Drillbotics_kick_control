@@ -3,12 +3,13 @@ We are controling a simulated kick using DWIS. Simulated kick is generate using 
 Here are the steps we need to do. 
 
 1. Connect to D-WIS Server
-2. Read The Parameters
-3. Convert Parameters from SI system to metric system
-4. Store Parameters in panda data frame
-5. Plot the data
-6. Detect the Operation
-7. Detect Kick
-8. Conform Kick
-9. Control Kick
-10. Resume Operation
+2. Define Parameters
+3. Read The Parameters
+4. Convert Parameters from SI system to metric system
+5. Store Parameters in panda data frame
+6. Plot the data
+7. Detect the Operation
+8. Detect Kick
+9. Conform Kick
+10. Control Kick
+11. Resume Operation

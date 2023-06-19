@@ -4,12 +4,17 @@ from opcua import Client
 import time
 
 # Connect to the OPC-UA server
-url = "opc.tcp://localhost:48030"
-client = Client(url)
-client.connect()
+client_read = Client("opc.tcp://localhost:48030")
+client_write = Client("opc.tcp://localhost:48031")
+client_read.connect()
+client_write.connect()
 
-# Get the "SPP" node from the server using its NodeId
-bit_node = client.get_node("ns=6;s=openLAB.BitDepth")
+# Get the "All" node from the server using its NodeId
+active_pit_density = client_read.get_node("ns=6;s=openLAB.ActivePitDensity").get_value()
+active_pit_density = round(active_pit_density / 1000, 2)  # Convert from Kg/m^3 to sg
+
+bit_depth = client_read.get_node("ns=6;s=openLAB.BitDepth").get_value()
+bit_depth = round(bit_depth, 1)
 
 # Create a subplot grid with one row and one column
 fig = make_subplots(rows=1, cols=1)

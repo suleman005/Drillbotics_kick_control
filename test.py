@@ -1,13 +1,14 @@
 import dash
 from dash.dependencies import Output, Input
 from dash import dcc
-import dash_html_components as html
+from dash import html
 import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 from collections import deque
-from connect_server import connect_to_server
+from connect_server import connect_read_server,connect_write_server
 
-client = connect_to_server()
+client_read = connect_read_server()
+client_write = connect_write_server()
 
 X = deque(maxlen=100)
 X.append(1)
