@@ -47,9 +47,34 @@ WID_StringVelocity = "ns=6;s=openLAB.TopOfStringVelocitySetPoint"
 
 
 
+pit_density = client_read.get_node(ID_PitDensity).get_value()
+pit_density = round(active_pit_density / 1000, 2)  # Convert from Kg/m^3 to sg
 
-active_pit_density = client_read.get_node(ID_ActivePitDensity).get_value()
-active_pit_density = round(active_pit_density / 1000, 2)  # Convert from Kg/m^3 to sg
+pit_temperature = client_read.get_node(ID_PitTemperature).get_value()
+pit_volume = client_read.get_node(ID_PitVolume).get_value()
+Annulus_Pressure = client_read.get_node(ID_AnnulusPressure).get_value()
+bit_depth = client_read.get_node(ID_BitDepth).get_value()
+BOP_ChokeOpening = client_read.get_node(ID_BOPChokeOpening).get_value()
+BOP_ChokePressure = client_read.get_node(ID_BOPChokePressure).get_value()
+MPD_ChokeOpening = client_read.get_node(ID_MPDChokeOpening).get_value()
+MPD_ChokePressure = client_read.get_node(ID_MPDChokePressure).get_value()
+ECD_Downhole = client_read.get_node(ID_ECDDownhole).get_value()
+Pressure_Downhole = client_read.get_node(ID_PressureDownhole).get_value()
+Pressure_Downhole_WP = client_read.get_node(ID_PressureDownhole_WP).get_value()
+FLowRateIn = client_read.get_node(ID_FLowRateIn).get_value()
+FLowRateOut = client_read.get_node(ID_FLowRateOut).get_value()
+FLowRateOut_Gas = client_read.get_node(ID_FLowRateOut_Gas).get_value()
+HookLoad = client_read.get_node(ID_HookLoad).get_value()
+HookPosition = client_read.get_node(ID_HookPosition).get_value()
+HookVelocity = client_read.get_node(ID_HookVelocity).get_value()
+ROP_Inst = client_read.get_node(ID_ROPInst).get_value()
+SPP = client_read.get_node(ID_SPP).get_value()
+RPM_Surf = client_read.get_node(ID_RPMSurf).get_value()
+Torque_Surf = client_read.get_node(ID_TorqueSurf).get_value()
+TD = client_read.get_node(ID_TD).get_value()
+WOB = client_read.get_node(ID_WOB).get_value()
+
+
 
 bit_depth = client_read.get_node("ns=6;s=openLAB.BitDepth").get_value()
 bit_depth = round(bit_depth, 1)
