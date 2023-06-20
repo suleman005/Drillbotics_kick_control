@@ -74,29 +74,29 @@ TD = round(client_read.get_node(ID_TD).get_value(), 1)
 WOB = round(client_read.get_node(ID_WOB).get_value()/1000,1)
 
 
-timeStep = 0
+#timeStep = 0
 
-def read_and_save_data(node_ids, filter_ids, df):
+def read_and_save_data(node_ids, filter_ids):
+    data = {'Timestamp': [], 'Parameter': [], 'Value': []}
+
     # Assuming the 'client_read' object is already defined
 
     # Read and save data continuously
     while True:
+        timestamp = time.time()
+        for parameter, node_id in zip(all_parameters, node_ids):
+            if parameter in filter_ids:
+                value = node_id  # Assign the node ID as the value
+                data['Timestamp'].append(timestamp)
+                data['Parameter'].append(parameter)
+                data['Value'].append(value)
 
-        for node_id in node_ids:
-            if node_id in filter_ids:
-                value = client_read.get_node(node_id).get_value()
-                timestamp = time.time()
-                new_row = {'Timestamp': timestamp, 'Node ID': node_id, 'Value': value}
-                df = df.append(new_row, ignore_index=True)
+        # Create a DataFrame from the collected data
+        df = pd.DataFrame(data)
 
-        #use Axel code here to detect kick and return value. connect well control here. and take action
-        kickdetected, trendvalues = trend(df)
-        wellcontrolvalues = wellcontrol(kickdetected, df)
-        plot(df, trendvalues, wellcontrolvalues)
-
+        # Perform further operations on the DataFrame as needed
+        # For example, you can save the DataFrame to a file or print it
         print(df)
-
-        timeStep += 1
 
         time.sleep(1)  # Wait for 1 second before the next iteration
 
@@ -119,9 +119,13 @@ read_parameters = [
     HookVelocity, ROP_Inst, SPP, RPM_Surf, Torque_Surf, TD, WOB
 ]
 
-# Call the function to continuously update the DataFrame
-read_and_save_data(all_parameters, read_parameters, df)
+## Create an empty DataFrame
+df = pd.DataFrame(columns=['Timestamp', 'Parameter', 'Value'])
 
+# Continuously run the function and update the DataFrame
+while True:
+    read_and_save_data(all_parameters, read_parameters)
+    time.sleep(1)
 
 # Dont Use Code below this..................................................
 
