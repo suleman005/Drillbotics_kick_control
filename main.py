@@ -48,7 +48,7 @@ WID_StringVelocity = "ns=6;s=openLAB.TopOfStringVelocitySetPoint"
 
 
 pit_density = round(client_read.get_node(ID_PitDensity).get_value() / 1000, 2)  # Convert from Kg/m^3 to sg
-pit_temperature = client_read.get_node(ID_PitTemperature).get_value()
+pit_temperature = round(client_read.get_node(ID_PitTemperature).get_value()-273.15,1)
 pit_volume = round(client_read.get_node(ID_PitVolume).get_value()*1000,1) #convert from cubic meters to litres
 #Why are we getting 4 values?????
 Annulus_Pressure = round(client_read.get_node(ID_AnnulusPressure).get_value()[0]/100000, 1) # Pascals to bars
@@ -58,8 +58,8 @@ BOP_ChokePressure = round(client_read.get_node(ID_BOPChokePressure).get_value()/
 MPD_ChokeOpening = client_read.get_node(ID_MPDChokeOpening).get_value()
 MPD_ChokePressure = round(client_read.get_node(ID_MPDChokePressure).get_value()/100000,1)
 ECD_Downhole = round(client_read.get_node(ID_ECDDownhole).get_value() / 1000, 2)
-Pressure_Downhole = round(client_read.get_node(ID_PressureDownhole).get_value()/100000,1)
-Pressure_Downhole_WP = round(client_read.get_node(ID_PressureDownhole_WP).get_value()/100000,1)
+Pressure_Downhole = round(client_read.get_node(ID_PressureDownhole).get_value() / 100000, 1)
+Pressure_Downhole_WP = round(client_read.get_node(ID_PressureDownhole_WP).get_value() / 100000,1)
 FLowRateIn = round(client_read.get_node(ID_FLowRateIn).get_value()*60000, 1)
 FLowRateOut = round(client_read.get_node(ID_FLowRateOut).get_value()*60000, 1)
 FLowRateOut_Gas = round(client_read.get_node(ID_FLowRateOut_Gas).get_value()*60000, 1)
@@ -121,6 +121,9 @@ read_parameters = [
 
 # Call the function to continuously update the DataFrame
 read_and_save_data(all_parameters, read_parameters, df)
+
+
+# Dont Use Code below this..................................................
 
 # Create a subplot grid with one row and one column
 fig = make_subplots(rows=1, cols=1)
