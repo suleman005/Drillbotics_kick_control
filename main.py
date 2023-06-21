@@ -47,114 +47,86 @@ WID_StringVelocity = "ns=6;s=openLAB.TopOfStringVelocitySetPoint"
 
 
 
-pit_density = round(client_read.get_node(ID_PitDensity).get_value() / 1000, 2)  # Convert from Kg/m^3 to sg
-pit_temperature = round(client_read.get_node(ID_PitTemperature).get_value()-273.15,1)
-pit_volume = round(client_read.get_node(ID_PitVolume).get_value()*1000,1) #convert from cubic meters to litres
+pit_density = ["pit_density", round(client_read.get_node(ID_PitDensity).get_value() / 1000, 2)]# Convert from Kg/m^3 to sg
+pit_temperature = ["pit_temperature", round(client_read.get_node(ID_PitTemperature).get_value()-273.15,1)]
+pit_volume = ["pit_volume", round(client_read.get_node(ID_PitVolume).get_value()*1000,1)] #convert from cubic meters to litres
 #Why are we getting 4 values?????
-Annulus_Pressure = round(client_read.get_node(ID_AnnulusPressure).get_value()[0]/100000, 1) # Pascals to bars
-bit_depth = round(client_read.get_node(ID_BitDepth).get_value(), 1)
-BOP_ChokeOpening = client_read.get_node(ID_BOPChokeOpening).get_value()
-BOP_ChokePressure = round(client_read.get_node(ID_BOPChokePressure).get_value()/100000,1)
-MPD_ChokeOpening = client_read.get_node(ID_MPDChokeOpening).get_value()
-MPD_ChokePressure = round(client_read.get_node(ID_MPDChokePressure).get_value()/100000,1)
-ECD_Downhole = round(client_read.get_node(ID_ECDDownhole).get_value() / 1000, 2)
-Pressure_Downhole = round(client_read.get_node(ID_PressureDownhole).get_value() / 100000, 1)
-Pressure_Downhole_WP = round(client_read.get_node(ID_PressureDownhole_WP).get_value() / 100000,1)
-FLowRateIn = round(client_read.get_node(ID_FLowRateIn).get_value()*60000, 1)
-FLowRateOut = round(client_read.get_node(ID_FLowRateOut).get_value()*60000, 1)
-FLowRateOut_Gas = round(client_read.get_node(ID_FLowRateOut_Gas).get_value()*60000, 1)
-HookLoad = round(client_read.get_node(ID_HookLoad).get_value()/1000,1)
-HookPosition = client_read.get_node(ID_HookPosition).get_value()
-HookVelocity = client_read.get_node(ID_HookVelocity).get_value()
-ROP_Inst = round(client_read.get_node(ID_ROPInst).get_value()*3600,1)
-SPP = round(client_read.get_node(ID_SPP).get_value()/100000,1)
-RPM_Surf = round(client_read.get_node(ID_RPMSurf).get_value()*60,1)
-Torque_Surf = round(client_read.get_node(ID_TorqueSurf).get_value()/1000,1)
-TD = round(client_read.get_node(ID_TD).get_value(), 1)
-WOB = round(client_read.get_node(ID_WOB).get_value()/1000,1)
+Annulus_Pressure = ["Annulus_Pressure", round(client_read.get_node(ID_AnnulusPressure).get_value()[0] / 100000, 1)]  # Pascals to bars
+bit_depth = ["bit_depth", round(client_read.get_node(ID_BitDepth).get_value(), 1)]
+BOP_ChokeOpening = ["BOP_ChokeOpening", client_read.get_node(ID_BOPChokeOpening).get_value()]
+BOP_ChokePressure = ["BOP_ChokePressure", round(client_read.get_node(ID_BOPChokePressure).get_value() / 100000, 1)]
+MPD_ChokeOpening = ["MPD_ChokeOpening", client_read.get_node(ID_MPDChokeOpening).get_value()]
+MPD_ChokePressure = ["MPD_ChokePressure", round(client_read.get_node(ID_MPDChokePressure).get_value() / 100000, 1)]
+ECD_Downhole = ["ECD_Downhole", round(client_read.get_node(ID_ECDDownhole).get_value() / 1000, 2)]
+Pressure_Downhole = ["Pressure_Downhole", round(client_read.get_node(ID_PressureDownhole).get_value() / 100000, 1)]
+Pressure_Downhole_WP = ["Pressure_Downhole_WP", round(client_read.get_node(ID_PressureDownhole_WP).get_value() / 100000, 1)]
+FLowRateIn = ["FLowRateIn", round(client_read.get_node(ID_FLowRateIn).get_value() * 60000, 1)]
+FLowRateOut = ["FLowRateOut", round(client_read.get_node(ID_FLowRateOut).get_value() * 60000, 1)]
+FLowRateOut_Gas = ["FLowRateOut_Gas", round(client_read.get_node(ID_FLowRateOut_Gas).get_value() * 60000, 1)]
+HookLoad = ["HookLoad", round(client_read.get_node(ID_HookLoad).get_value() / 1000, 1)]
+HookPosition = ["HookPosition", client_read.get_node(ID_HookPosition).get_value()]
+HookVelocity = ["HookVelocity", client_read.get_node(ID_HookVelocity).get_value()]
+ROP_Inst = ["ROP_Inst", round(client_read.get_node(ID_ROPInst).get_value() * 3600, 1)]
+SPP = ["SPP", round(client_read.get_node(ID_SPP).get_value() / 100000, 1)]
+RPM_Surf = ["RPM_Surf", round(client_read.get_node(ID_RPMSurf).get_value() * 60, 1)]
+Torque_Surf = ["Torque_Surf", round(client_read.get_node(ID_TorqueSurf).get_value() / 1000, 1)]
+TD = ["TD", round(client_read.get_node(ID_TD).get_value(), 1)]
+WOB = ["WOB", round(client_read.get_node(ID_WOB).get_value() / 1000, 1)]
 
 
-#timeStep = 0
-
-def read_and_save_data(node_ids, filter_ids):
-    data = {'Timestamp': [], 'Parameter': [], 'Value': []}
-
-    # Assuming the 'client_read' object is already defined
-
-    # Read and save data continuously
-    while True:
-        timestamp = time.time()
-        for parameter, node_id in zip(all_parameters, node_ids):
-            if parameter in filter_ids:
-                value = node_id  # Assign the node ID as the value
-                data['Timestamp'].append(timestamp)
-                data['Parameter'].append(parameter)
-                data['Value'].append(value)
-
-        # Create a DataFrame from the collected data
-        df = pd.DataFrame(data)
-
-        # Perform further operations on the DataFrame as needed
-        # For example, you can save the DataFrame to a file or print it
-        print(df)
-
-        time.sleep(1)  # Wait for 1 second before the next iteration
-
-
-# Create an empty DataFrame outside the function
-df = pd.DataFrame(columns=['Timestamp', 'Node ID', 'Value'])
-
-all_parameters = [
-    pit_density, pit_temperature, pit_volume, Annulus_Pressure, bit_depth, BOP_ChokeOpening,
-    BOP_ChokePressure, MPD_ChokeOpening, MPD_ChokePressure, ECD_Downhole, Pressure_Downhole,
-    Pressure_Downhole_WP, FLowRateIn, FLowRateOut, FLowRateOut_Gas, HookLoad, HookPosition,
-    HookVelocity, ROP_Inst, SPP, RPM_Surf, Torque_Surf, TD, WOB
+selected_parameters = [
+    pit_density,
+    pit_temperature,
+    pit_volume,
+    Annulus_Pressure,
+    bit_depth,
+    BOP_ChokeOpening,
+    BOP_ChokePressure,
+    MPD_ChokeOpening,
+    MPD_ChokePressure,
+    ECD_Downhole,
+    Pressure_Downhole,
+    Pressure_Downhole_WP,
+    FLowRateIn,
+    FLowRateOut,
+    FLowRateOut_Gas,
+    HookLoad,
+    HookPosition,
+    HookVelocity,
+    ROP_Inst,
+    SPP,
+    RPM_Surf,
+    Torque_Surf,
+    TD,
+    WOB
 ]
 
-# Write parameters you want to save in filter_ids
-read_parameters = [
-    pit_density, pit_temperature, pit_volume, Annulus_Pressure, bit_depth, BOP_ChokeOpening,
-    BOP_ChokePressure, MPD_ChokeOpening, MPD_ChokePressure, ECD_Downhole, Pressure_Downhole,
-    Pressure_Downhole_WP, FLowRateIn, FLowRateOut, FLowRateOut_Gas, HookLoad, HookPosition,
-    HookVelocity, ROP_Inst, SPP, RPM_Surf, Torque_Surf, TD, WOB
-]
+# Create an empty DataFrame
+df = pd.DataFrame()
+start_time = time.time()
 
-## Create an empty DataFrame
-df = pd.DataFrame(columns=['Timestamp', 'Parameter', 'Value'])
+while time.time() - start_time < 10:
+    # Create a dictionary to store the row data
+    row_data = {}
 
-# Continuously run the function and update the DataFrame
-while True:
-    read_and_save_data(all_parameters, read_parameters)
-    time.sleep(1)
+    # Get the current timestamp
+    timestamp = pd.Timestamp.now()
 
-# Dont Use Code below this..................................................
+    # Add the timestamp to the row data
+    row_data["timestamp"] = timestamp
 
-# Create a subplot grid with one row and one column
-fig = make_subplots(rows=1, cols=1)
+    # Iterate over the parameters and fetch their values
+    for parameter in selected_parameters:
+        name = parameter[0]
+        value = parameter[1]
 
-# Add an empty trace to the plot with the current SPP value as the initial point
-bit_value = bit_node.get_value()
-# convert the data
-timestamp = time.time()
-fig.add_trace(go.Scatter(x=[bit_value], y=[timestamp], mode="lines+markers"), row=1, col=1)
+        row_data[name] = value
 
-# Update the layout of the plot
-fig.update_layout(title="Bit Depth", xaxis_title="SPP", yaxis_title="Time")
+    # Store row data in the DataFrame
+    df = df.append(row_data, ignore_index=True)
 
-# Show the plot
-fig.show()
+    # Print the current values
+    print(df.tail(1))
 
-# Continuously update the plot with new SPP values
-while True:
-    # Read the current value of the "SPP" node
-    bit_value = bit_node.get_value()
-    timestamp = time.time()
-
-    # Append the new SPP value to the plot
-    fig.add_trace(go.Scatter(x=[bit_value], y=[timestamp], mode="lines+markers"), row=1, col=1)
-
-    # Update the plot
-    fig.update_traces(mode="lines+markers")
-
-    # Wait for a short amount of time before updating the plot again
+    # Wait for 1 second before reading the next set of data
     time.sleep(1)
