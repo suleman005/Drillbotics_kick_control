@@ -1,8 +1,7 @@
-import plotly.graph_objs as go
-from plotly.subplots import make_subplots
 from opcua import Client
 import pandas as pd
 import time
+from plot import plot_parameters,update_plots
 
 # Connect to the OPC-UA server
 client_read = Client("opc.tcp://localhost:48030")
@@ -104,7 +103,7 @@ selected_parameters = [
 # Create an empty DataFrame
 df = pd.DataFrame()
 start_time = time.time()
-
+counter = 0
 while time.time() - start_time < 10:
     # Create a dictionary to store the row data
     row_data = {}
@@ -124,57 +123,20 @@ while time.time() - start_time < 10:
 
     # Store row data in the DataFrame
     df = df.append(row_data, ignore_index=True)
-
+    fig =
+    if counter==0:
+        fig = plot_parameters(df)
+    else:
+        update_plots(df,fig)
     # Print the current values
     print(df.tail(1))
-
+    counter +=1
     # Wait for 1 second before reading the next set of data
     time.sleep(1)
 
 
-import plotly.graph_objs as go
-from plotly.subplots import make_subplots
-import pandas as pd
-
-# Function to plot selected parameters
-def plot_parameters(df):
-    # Create subplot grid based on the number of selected parameters
-    num_params = len(df.columns) - 1  # Exclude the timestamp column
-    fig = make_subplots(rows=num_params, cols=1, shared_xaxes=True)
-
-    # Iterate over the selected parameters
-    for i, col in enumerate(df.columns[1:]):  # Exclude the timestamp column
-        # Create a scatter plot for each parameter
-        fig.add_trace(
-            go.Scatter(
-                x=df['timestamp'],
-                y=df[col],
-                name=col
-            ),
-            row=i + 1, col=1
-        )
-
-    # Update layout and display the figure
-    fig.update_layout(height=600*num_params, showlegend=True)
-    fig.show()
-
-# Function to update plots when DataFrame is updated
-def update_plots(df, fig):
-    # Iterate over the selected parameters
-    for i, col in enumerate(df.columns[1:]):  # Exclude the timestamp column
-        # Update the y-axis data for each scatter plot
-        fig.data[i].y = df[col]
-
-    # Redraw the figure
-    fig.show()
 
 
-# Example usage
-df = pd.DataFrame({'timestamp': [], 'param1': [], 'param2': []})  # Replace with your actual DataFrame
-
-# Initial plot
 plot_parameters(df)
 
-# Update DataFrame and plots
-df = df.append({'timestamp': pd.Timestamp.now(), 'param1': 1, 'param2': 2}, ignore_index=True)
 update_plots(df, fig)
