@@ -1,7 +1,8 @@
 from opcua import Client
 import pandas as pd
 import time
-from plot import plot_parameters,update_plots
+from dashd import dash_plot
+
 
 # Connect to the OPC-UA server
 client_read = Client("opc.tcp://localhost:48030")
@@ -100,10 +101,35 @@ selected_parameters = [
     WOB
 ]
 
+selected_parameters = [
+    bit_depth,SPP
+]
+
 # Create an empty DataFrame
 df = pd.DataFrame()
-start_time = time.time()
+row_data = {}
+
+# Get the current timestamp
+timestamp = pd.Timestamp.now()
+
+# Add the timestamp to the row data
+row_data["timestamp"] = timestamp
+
+# Iterate over the parameters and fetch their values
+for parameter in selected_parameters:
+    name = parameter[0]
+    value = parameter[1]
+
+    row_data[name] = value
+
+# Store row data in the DataFrame
+df = df.append(row_data, ignore_index=True)
+
+
+#dash_plot(selected_parameters, data=df)
+
 counter = 0
+start_time = time.time()
 while time.time() - start_time < 10:
     # Create a dictionary to store the row data
     row_data = {}
@@ -123,20 +149,10 @@ while time.time() - start_time < 10:
 
     # Store row data in the DataFrame
     df = df.append(row_data, ignore_index=True)
-    fig =
-    if counter==0:
-        fig = plot_parameters(df)
-    else:
-        update_plots(df,fig)
+
     # Print the current values
     print(df.tail(1))
     counter +=1
     # Wait for 1 second before reading the next set of data
     time.sleep(1)
 
-
-
-
-plot_parameters(df)
-
-update_plots(df, fig)
