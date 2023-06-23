@@ -101,32 +101,8 @@ selected_parameters = [
     WOB
 ]
 
-selected_parameters = [
-    bit_depth,SPP
-]
-
 # Create an empty DataFrame
 df = pd.DataFrame()
-row_data = {}
-
-# Get the current timestamp
-timestamp = pd.Timestamp.now()
-
-# Add the timestamp to the row data
-row_data["timestamp"] = timestamp
-
-# Iterate over the parameters and fetch their values
-for parameter in selected_parameters:
-    name = parameter[0]
-    value = parameter[1]
-
-    row_data[name] = value
-
-# Store row data in the DataFrame
-df = df.append(row_data, ignore_index=True)
-
-
-#dash_plot(selected_parameters, data=df)
 
 counter = 0
 start_time = time.time()
