@@ -62,7 +62,7 @@ def plot_parameters(selected_parameters):
         return fig
 
     if __name__ == '__main__':
-        app.run_server(debug=True, port=8001)
+        app.run_server(debug=True, port=3050)
 
 
 from dwis import *

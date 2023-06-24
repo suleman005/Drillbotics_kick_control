@@ -5,7 +5,6 @@ def close_BOP():
     BOP_Opening(0)
     client_write.disconnect()
 
-
 def open_BOP():
     BOP_Opening(1)
 
@@ -13,15 +12,17 @@ def open_BOP():
 def open_MPD(percent):
     MPD_Opening(percent / 100)
 
-
 def set_flow_in(lpm):
     Flow_In(lpm / 60000)
 
 def stop_pump():
     Flow_In(0)
 
-def stop_rotation():
+def set_rpm(rpm):
+    RPM_set(rpm/60)
 
+def stop_rotation():
+    set_rpm(0)
 
 def stop_drilling():
 

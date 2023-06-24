@@ -81,3 +81,6 @@ def MPD_Opening(value):
 
 def Flow_In(value):
     client_write.get_node(WID_FlowRateIn).set_value(value, ua.VariantType.Double)
+
+def RPM_set(value):
+    client_write.get_node(WID_FlowRateIn).set_value(value, ua.VariantType.Double)
