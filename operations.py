@@ -24,15 +24,18 @@ def set_rpm(rpm):
 def stop_rotation():
     set_rpm(0)
 
+def set_pipe_velocity(mps):
+    String_velocity(mps)
 
 def stop_drilling():
-
+    set_pipe_velocity(0)
     set_rpm(0)
     stop_pump()
 
-
-
-
+def start_drilling():
+    set_rpm(120)
+    set_pipe_velocity(-0.4)
+    set_flow_in(1800)
 
 
 open_BOP()
