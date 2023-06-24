@@ -8,7 +8,6 @@ def close_BOP():
 def open_BOP():
     BOP_Opening(1)
 
-
 def open_MPD(percent):
     MPD_Opening(percent / 100)
 
@@ -36,6 +35,7 @@ def start_drilling():
     set_rpm(120)
     set_pipe_velocity(-0.4)
     set_flow_in(1800)
+
 
 
 open_BOP()
