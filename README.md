@@ -15,9 +15,9 @@ Here are the steps we need to do.
 3. Read The Parameters - Done
 4. Convert Parameters from SI system to metric system  - Done
 5. Store Parameters in panda data frame - Done
-6. Plot the data - Working
-7. Detect the Operation 
-8. Detect Kick
-9. Conform Kick
-10. Control Kick
-11. Resume Operation
+6. Plot the data - Done
+7. Detect the Operation  - Done
+8. Detect Kick - Axel Code
+9. Conform Kick - Work on Sunday
+10. Control Kick - Work on Sunday
+11. Resume Operation - Work on Sunday
