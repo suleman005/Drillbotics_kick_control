@@ -24,7 +24,14 @@ def set_rpm(rpm):
 def stop_rotation():
     set_rpm(0)
 
+
 def stop_drilling():
+
+    set_rpm(0)
+    stop_pump()
+
+
+
 
 
 

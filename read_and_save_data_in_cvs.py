@@ -16,8 +16,8 @@ selected_parameters = [
     ECD_Downhole,
     Pressure_Downhole,
     Pressure_Downhole_WP,
-    FLowRateIn,
-    FLowRateOut,
+    FlowRateIn,
+    FlowRateOut,
     FLowRateOut_Gas,
     HookLoad,
     HookPosition,
@@ -30,9 +30,34 @@ selected_parameters = [
     WOB
 ]
 
+selected_parameters = [
+    pit_density,
+    pit_temperature,
+    pit_volume,
+    Annulus_Pressure,
+    bit_depth,
+    BOP_ChokeOpening,
+    BOP_ChokePressure,
+    MPD_ChokeOpening,
+    MPD_ChokePressure,
+    ECD_Downhole,
+    Pressure_Downhole,
+    Pressure_Downhole_WP,
+    FlowRateIn,
+    FlowRateOut,
+    FLowRateOut_Gas,
+    HookLoad,
+    HookPosition,
+    HookVelocity,
+    ROP_Inst,
+    SPP,
+    RPM_Surf,
+    Torque_Surf,
+    TD,
+    WOB
+]
 
-
-plot_parameters(selected_parameters)
+#plot_parameters(selected_parameters)
 
 # Create an empty DataFrame
 df = pd.DataFrame()
@@ -52,7 +77,7 @@ while time.time() - start_time < 10:
     # Iterate over the parameters and fetch their values
     for parameter in selected_parameters:
         name = parameter[0]
-        value = parameter[1]
+        value = eval(parameter[1])
 
         row_data[name] = value
 

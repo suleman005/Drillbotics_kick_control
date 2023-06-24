@@ -76,8 +76,8 @@ selected_parameters = [
     ECD_Downhole,
     Pressure_Downhole,
     Pressure_Downhole_WP,
-    FLowRateIn,
-    FLowRateOut,
+    FlowRateIn,
+    FlowRateOut,
     FLowRateOut_Gas
 ]
 

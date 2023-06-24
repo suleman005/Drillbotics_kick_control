@@ -59,8 +59,8 @@ ECD_Downhole = ["ECD_Downhole", "round(client_read.get_node(ID_ECDDownhole).get_
 Pressure_Downhole = ["Pressure_Downhole", "round(client_read.get_node(ID_PressureDownhole).get_value() / 100000, 1)"]
 Pressure_Downhole_WP = ["Pressure_Downhole_WP",
                         "round(client_read.get_node(ID_PressureDownhole_WP).get_value() / 100000, 1)"]
-FLowRateIn = ["FLowRateIn", "round(client_read.get_node(ID_FLowRateIn).get_value() * 60000, 1)"]
-FLowRateOut = ["FLowRateOut", "round(client_read.get_node(ID_FLowRateOut).get_value() * 60000, 1)"]
+FlowRateIn = ["FlowRateIn", "round(client_read.get_node(ID_FLowRateIn).get_value() * 60000, 1)"]
+FlowRateOut = ["FlowRateOut", "round(client_read.get_node(ID_FLowRateOut).get_value() * 60000, 1)"]
 FLowRateOut_Gas = ["FLowRateOut_Gas", "round(client_read.get_node(ID_FLowRateOut_Gas).get_value() * 60000, 1)"]
 HookLoad = ["HookLoad", "round(client_read.get_node(ID_HookLoad).get_value() / 1000, 1)"]
 HookPosition = ["HookPosition", "client_read.get_node(ID_HookPosition).get_value()"]
@@ -84,3 +84,6 @@ def Flow_In(value):
 
 def RPM_set(value):
     client_write.get_node(WID_FlowRateIn).set_value(value, ua.VariantType.Double)
+
+def String_velocity(value):
+    client_write.get_node(WID_StringVelocity).set_value(value, ua.VariantType.Double)
