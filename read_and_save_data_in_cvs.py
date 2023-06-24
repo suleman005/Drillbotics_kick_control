@@ -1,7 +1,7 @@
 from dwis import *
 import pandas as pd
 import time
-
+from plot_para import plot_parameters
 
 selected_parameters = [
     pit_density,
@@ -29,6 +29,10 @@ selected_parameters = [
     TD,
     WOB
 ]
+
+
+
+plot_parameters(selected_parameters)
 
 # Create an empty DataFrame
 df = pd.DataFrame()

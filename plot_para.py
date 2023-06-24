@@ -1,8 +1,8 @@
 from collections import deque
 from opcua import Client
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -40,7 +40,7 @@ def plot_parameters(selected_parameters):
 
         for parameter in selected_parameters:
             parameter_name = parameter[0]
-            value = parameter[1]
+            value = eval(parameter[1])
             Y[parameter_name].append(value)
 
         fig = make_subplots(rows=1, cols=len(selected_parameters), shared_yaxes=True)
@@ -63,3 +63,22 @@ def plot_parameters(selected_parameters):
 
     if __name__ == '__main__':
         app.run_server(debug=True, port=8001)
+
+
+from dwis import *
+selected_parameters = [
+    pit_volume,
+    bit_depth,
+    BOP_ChokeOpening,
+    BOP_ChokePressure,
+    MPD_ChokeOpening,
+    MPD_ChokePressure,
+    ECD_Downhole,
+    Pressure_Downhole,
+    Pressure_Downhole_WP,
+    FLowRateIn,
+    FLowRateOut,
+    FLowRateOut_Gas
+]
+
+plot_parameters(selected_parameters)

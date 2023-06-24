@@ -1,5 +1,11 @@
 # Drillbotics_kick_control
 ## Only Use main.py right now. 
+
+
+Notes:
+
+1. Pandas 1.3.3 ----> install it using "pip install pip install pandas==1.3.3"
+
 We are controling a simulated kick using DWIS. Simulated kick is generate using Openlab
 Here are the steps we need to do. 
 

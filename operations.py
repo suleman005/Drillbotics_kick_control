@@ -20,5 +20,11 @@ def set_flow_in(lpm):
 def stop_pump():
     Flow_In(0)
 
+def stop_rotation():
+
+
+def stop_drilling():
+
+
 
 open_BOP()
