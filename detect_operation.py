@@ -5,30 +5,14 @@ import time
 def detect_operation():
 
     selected_parameters = [
-        pit_density,
-        pit_temperature,
         pit_volume,
         Annulus_Pressure,
         bit_depth,
-        BOP_ChokeOpening,
-        BOP_ChokePressure,
-        MPD_ChokeOpening,
-        MPD_ChokePressure,
-        ECD_Downhole,
-        Pressure_Downhole,
-        Pressure_Downhole_WP,
         FlowRateIn,
         FlowRateOut,
-        FLowRateOut_Gas,
-        HookLoad,
-        HookPosition,
-        HookVelocity,
-        ROP_Inst,
         SPP,
-        RPM_Surf,
-        Torque_Surf,
-        TD,
-        WOB
+        WOB,
+        BOP_ChokePressure
     ]
 
     # Create an empty DataFrame
@@ -49,7 +33,7 @@ def detect_operation():
         # Iterate over the parameters and fetch their values
         for parameter in selected_parameters:
             name = parameter[0]
-            value = eval(parameter[1])
+            value = eval(parameter[1]) if parameter[1] is not None else 0
 
             row_data[name] = value
 
@@ -57,10 +41,10 @@ def detect_operation():
         df = df.append(row_data, ignore_index=True)
 
         # Print the current values
-        print(df.tail(1))
+        #print(df.tail(1))
         counter += 1
         # Wait for 1 second before reading the next set of data
-        time.sleep(1)
+        time.sleep(0.5)
 
     previous_value = df.iloc[-11]
     current_value = df.iloc[-1]
@@ -104,6 +88,8 @@ def detect_operation():
             return "Stuck"
         else:
             return "Unknown"
-x= detect_operation()
 
-print(x)
+while True:
+    x= detect_operation()
+
+    print(x)

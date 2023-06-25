@@ -3,7 +3,7 @@ import pandas as pd
 import time
 
 
-def confirm_kick(threshold=500):
+def confirm_kick(threshold):
     selected_parameters = [pit_volume, Annulus_Pressure]
 
     # Create an empty DataFrame
@@ -25,7 +25,7 @@ def confirm_kick(threshold=500):
         # Iterate over the parameters and fetch their values
         for parameter in selected_parameters:
             name = parameter[0]
-            value = eval(parameter[1])
+            value = eval(parameter[1]) if parameter[1] is not None else 0
 
             row_data[name] = value
 
@@ -33,7 +33,7 @@ def confirm_kick(threshold=500):
         df = df.append(row_data, ignore_index=True)
 
         # Print the current values
-        print(df.tail(1))
+        #print(df.tail(1))
         counter += 1
 
         # Wait for 2 second before reading the next set of data
@@ -55,3 +55,6 @@ def confirm_kick(threshold=500):
     else:
         # No kick detected
         print("No kick detected.")
+
+
+confirm_kick(200)

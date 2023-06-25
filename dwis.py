@@ -39,8 +39,8 @@ ID_WOB = "ns=6;s=openLAB.WOB"
 WID_BOPOpening = "ns=2;s=BOPOpeningSetPoint"  # 0 = close, 1 = open
 WID_MPDOpening = "ns=2;s=ChokeOpeningSetPoint"  # 0 = close, 1 = open
 WID_FlowRateIn = "ns=2;s=FlowRateInSetPoint"  # m^3/sec
-WID_RPM = "ns=6;s=openLAB.SurfaceRPMSetPoint"  # Units = rev/sec
-WID_StringVelocity = "ns=6;s=openLAB.TopOfStringVelocitySetPoint"
+WID_RPM = "ns=2;s=SurfaceRPMSetPoint"  # Units = rev/sec
+WID_StringVelocity = "ns=2;s=TopOfStringVelocitySetPoint"
 
 pit_density = ["pit_density",
                "round(client_read.get_node(ID_PitDensity).get_value() / 1000, 2)"]  # Convert from Kg/m^3 to sg
@@ -83,7 +83,7 @@ def Flow_In(value):
     client_write.get_node(WID_FlowRateIn).set_value(value, ua.VariantType.Double)
 
 def RPM_set(value):
-    client_write.get_node(WID_FlowRateIn).set_value(value, ua.VariantType.Double)
+    client_write.get_node(WID_RPM).set_value(value, ua.VariantType.Double)
 
 def String_velocity(value):
     client_write.get_node(WID_StringVelocity).set_value(value, ua.VariantType.Double)

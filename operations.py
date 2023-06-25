@@ -34,8 +34,9 @@ def stop_drilling():
 def start_drilling():
     set_rpm(120)
     set_pipe_velocity(-0.4)
-    set_flow_in(1800)
+    set_flow_in(1000)
 
 
 
-open_BOP()
+stop_drilling()
+close_BOP()

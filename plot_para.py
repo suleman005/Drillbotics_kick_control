@@ -25,7 +25,7 @@ def plot_parameters(selected_parameters):
             dcc.Graph(id='live-graph', animate=True),
             dcc.Interval(
                 id='graph-update',
-                interval=1000,
+                interval=500,
                 n_intervals=0
             ),
         ]
@@ -62,7 +62,7 @@ def plot_parameters(selected_parameters):
         return fig
 
     if __name__ == '__main__':
-        app.run_server(debug=True, port=3050)
+        app.run_server(debug=False, port=3050)
 
 
 from dwis import *
@@ -75,10 +75,8 @@ selected_parameters = [
     MPD_ChokePressure,
     ECD_Downhole,
     Pressure_Downhole,
-    Pressure_Downhole_WP,
     FlowRateIn,
-    FlowRateOut,
-    FLowRateOut_Gas
+    FlowRateOut
 ]
 
 plot_parameters(selected_parameters)
