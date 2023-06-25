@@ -18,6 +18,6 @@ Here are the steps we need to do.
 6. Plot the data - Done
 7. Detect the Operation  - Done
 8. Detect Kick - Axel Code
-9. Conform Kick - Work on Sunday
+9. Conform Kick - Done
 10. Control Kick - Work on Sunday
 11. Resume Operation - Work on Sunday

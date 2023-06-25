@@ -47,6 +47,8 @@ def confirm_kick(threshold):
 
     if not kick_rows.empty:
         # Kick detected
+
+        kick = True
         print("Kick confirmed at the following timesteps:")
         print(kick_rows)
 
@@ -54,7 +56,7 @@ def confirm_kick(threshold):
 
     else:
         # No kick detected
+        kick = False
         print("No kick detected.")
 
-
-confirm_kick(200)
+    return kick

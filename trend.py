@@ -29,9 +29,7 @@ def detect_future_kick(df, future_values):
 
     return future_kick_columns
 # Function to get data from simulation
-def get_sim_data(sim, timeStep):
-    sim.step(timeStep)
-    sim.get_results(timeStep, TAGS)
+
 
     return {
         'SPP': sim.results.SPP[timeStep],
