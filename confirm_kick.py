@@ -1,6 +1,7 @@
 from dwis import *
 import pandas as pd
 import time
+from operations import *
 
 
 def confirm_kick(threshold):
@@ -48,15 +49,16 @@ def confirm_kick(threshold):
     if not kick_rows.empty:
         # Kick detected
 
-        kick = True
+        kick = 1
         print("Kick confirmed at the following timesteps:")
+        #control_kick()
         print(kick_rows)
 
         # Additional actions or analysis can be performed here
 
     else:
         # No kick detected
-        kick = False
+        kick = 0
         print("No kick detected.")
 
     return kick

@@ -71,25 +71,21 @@ def detect_operation():
     current_spp = current_value['SPP']
 
     if (current_annulus_pressure > 0 or current_choke_pressure > 0) and current_spp == 0:
-        return "Well Control - Shut-in"
+        return "String Connection"
 
     elif current_flow_rate_in == 0 and current_flow_rate_out == 0 and abs(current_pit_volume - previous_pit_volume) < 500:
-        return "Well Control - Shut-in"
+        return "Shut-in/String Connection"
     else:
         if current_WOB > 0 and current_bit_depth > previous_bit_depth:
             return "Drilling"
         elif current_WOB == 0 and current_bit_depth > previous_bit_depth:
-            return "Tripping In"
+            return "Tripping In/String Connection"
         elif current_WOB == 0 and current_bit_depth < previous_bit_depth:
-            return "Tripping Out"
+            return "Tripping Out/String Connection"
         elif current_WOB == 0 and current_bit_depth == previous_bit_depth and current_flow_rate_in > 0 and current_flow_rate_out > 0:
-            return "Mud Circulation"    
+            return "Mud Circulation/String Connection"
         elif current_WOB != 0 and current_bit_depth == previous_bit_depth:
-            return "Stuck"
+            return "Stuck/String Connection"
         else:
             return "Unknown"
 
-while True:
-    x= detect_operation()
-
-    print(x)

@@ -19,5 +19,5 @@ Here are the steps we need to do.
 7. Detect the Operation  - Done
 8. Detect Kick - Axel Code
 9. Conform Kick - Done
-10. Control Kick - Work on Sunday
-11. Resume Operation - Work on Sunday
+10. Control Kick - Testing
+11. Resume Operation - Testing
