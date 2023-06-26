@@ -4,7 +4,7 @@ import time
 from operations import *
 
 
-def confirm_kick(threshold):
+def confirm_kick_loss(threshold):
     selected_parameters = [pit_volume, Annulus_Pressure]
 
     # Create an empty DataFrame
@@ -34,7 +34,7 @@ def confirm_kick(threshold):
         df = df.append(row_data, ignore_index=True)
 
         # Print the current values
-        #print(df.tail(1))
+        # print(df.tail(1))
         counter += 1
 
         # Wait for 2 second before reading the next set of data
@@ -42,23 +42,33 @@ def confirm_kick(threshold):
 
     # Calculate the difference between consecutive pit_volume values
     df['pit_volume_diff'] = df['pit_volume'].diff()
-
+    print(df['pit_volume_diff'])
     # Identify rows where the pit_volume_diff exceeds the threshold
     kick_rows = df[abs(df['pit_volume_diff']) > threshold]
+
+    kick = 0
+    loss = 0
 
     if not kick_rows.empty:
         # Kick detected
 
-        kick = 1
-        print("Kick confirmed at the following timesteps:")
-        #control_kick()
-        print(kick_rows)
+        if kick_rows['pit_volume_diff'].iloc[0] > 0:
+            # Kick detected
+            kick = 1
+            loss = 0
+            print("Kick confirmed at the following timesteps:")
+        else:
+            # Loss detected
+            kick = 0
+            loss = 1
+            print("Loss confirmed at the following timesteps:")
 
+        print(kick_rows)
         # Additional actions or analysis can be performed here
 
     else:
         # No kick detected
         kick = 0
-        print("No kick detected.")
+        print("No kick or Loss detected.")
 
-    return kick
+    return kick, loss

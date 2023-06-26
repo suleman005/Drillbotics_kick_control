@@ -54,20 +54,36 @@ def resume_drilling(rpm, flowRate, pipe_velocity, MPD_value):
     open_MPD(MPD_value)
 
 def control_kick():
+    client_write.connect()
     revpmin, fr, MPD_value = save_current_drilling_parameters()
+    time.sleep(1)
     print("Kick Detected")
-    stop_drilling()
-    print("Drilling Stopped")
+    #stop_drilling()
     close_BOP()
     print("BOP Closed")
-    time.sleep(3)
-    open_MPD((MPD_value - 0) / 2)
+    time.sleep(10)
+    open_MPD(MPD_value-((MPD_value-0)/2))
+    set_flow_in(fr+300)
     print("MPD Choke opening decreased")
-    time.sleep(3)
+    time.sleep(10)
     open_BOP()
-    resume_drilling(revpmin, fr + 300, -0.4, (MPD_value-0) / 2)
+    time.sleep(10)
+    resume_drilling(revpmin, fr + 300, -0.4, MPD_value-((MPD_value-0)/2))
+    time.sleep(10)
+
     print("Drilling Resumed")
 
+
+def control_loss():
+    client_write.connect()
+    revpmin, fr, MPD_value = save_current_drilling_parameters()
+
+    open_MPD(MPD_value+((MPD_value-0)/2))
+    print("MPD Choke opening Increased")
+    set_flow_in(fr-300)
+    print("Flow Rate Decreased")
+    time.sleep(5)
+    print("Drilling Resumed")
 
 start_drilling()
 set_flow_in(500)

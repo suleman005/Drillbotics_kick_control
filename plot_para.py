@@ -70,11 +70,8 @@ selected_parameters = [
     pit_volume,
     bit_depth,
     BOP_ChokeOpening,
-    BOP_ChokePressure,
     MPD_ChokeOpening,
-    MPD_ChokePressure,
     ECD_Downhole,
-    Pressure_Downhole,
     FlowRateIn,
     FlowRateOut
 ]

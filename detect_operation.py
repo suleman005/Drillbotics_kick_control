@@ -85,7 +85,9 @@ def detect_operation():
         elif current_WOB == 0 and current_bit_depth == previous_bit_depth and current_flow_rate_in > 0 and current_flow_rate_out > 0:
             return "Mud Circulation/String Connection"
         elif current_WOB != 0 and current_bit_depth == previous_bit_depth:
-            return "Stuck/String Connection"
+            return "Stuck/String Connection/No Drilling"
         else:
             return "Unknown"
 
+while True:
+    print(f"operation = {detect_operation()}")

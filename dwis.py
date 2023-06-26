@@ -46,7 +46,7 @@ pit_density = ["pit_density",
                "round(client_read.get_node(ID_PitDensity).get_value() / 1000, 2)"]  # Convert from Kg/m^3 to sg
 pit_temperature = ["pit_temperature", "round(client_read.get_node(ID_PitTemperature).get_value() - 273.15, 1)"]
 pit_volume = ["pit_volume",
-              "round(client_read.get_node(ID_PitVolume).get_value() * 1000, 1)"]  # convert from cubic meters to litres
+              "round(client_read.get_node(ID_PitVolume).get_value(), 3)"]  # in meter cube
 # Why are we getting 4 values?????
 Annulus_Pressure = ["Annulus_Pressure",
                     "round(client_read.get_node(ID_AnnulusPressure).get_value()[0] / 100000, 1)"]  # Pascals to bars
