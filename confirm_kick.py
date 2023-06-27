@@ -42,7 +42,7 @@ def confirm_kick_loss(threshold):
 
     # Calculate the difference between consecutive pit_volume values
     df['pit_volume_diff'] = df['pit_volume'].diff()
-    print(df['pit_volume_diff'])
+    #print(df['pit_volume_diff'])
     # Identify rows where the pit_volume_diff exceeds the threshold
     kick_rows = df[abs(df['pit_volume_diff']) > threshold]
 

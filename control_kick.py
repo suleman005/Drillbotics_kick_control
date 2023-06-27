@@ -2,7 +2,7 @@ from confirm_kick import *
 from operations import *
 
 while True:
-    kick_loss_volume = 0.03
+    kick_loss_volume = 0.04
     kick,loss = confirm_kick_loss(kick_loss_volume)
 
     if kick == 1:
